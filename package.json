@@ -9,19 +9,33 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "@prisma/client": "^6.5.0",
+    "@types/jszip": "^3.4.1",
+    "@types/lodash": "^4.17.16",
+    "jszip": "^3.10.1",
+    "lodash": "^4.17.21",
+    "mammoth": "^1.9.0",
+    "monaco-editor": "^0.52.2",
+    "next": "15.2.3",
+    "pako": "^2.1.0",
+    "party-js": "^2.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.2.3"
+    "react-toastify": "^11.0.5",
+    "short-unique-id": "^5.2.2"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "daisyui": "^5.0.9",
     "eslint": "^9",
     "eslint-config-next": "15.2.3",
-    "@eslint/eslintrc": "^3"
+    "prisma": "6.5.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

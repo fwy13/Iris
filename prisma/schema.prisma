@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Files {
+  id   String @id @db.VarChar(255)
+  name String @db.VarChar(255)
+  type String @db.VarChar(255)
+}
+
+model Quizs {
+  id    String @id @db.VarChar(255)
+  name  String @db.VarChar(255)
+  time  Int
+  data  Json
+  count Int
+}
