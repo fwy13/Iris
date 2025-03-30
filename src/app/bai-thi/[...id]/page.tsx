@@ -237,7 +237,14 @@ const PageExam = () => {
                         </div>
                         <button
                             className="flex gap-2 justify-center p-1 bg-[#F97316] rounded-lg w-full text-white"
-                            onClick={() => setLearning(false)}
+                            onClick={() => {
+                                setLearning(false);
+                                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                const { name, id, avatar } = JSON.parse(
+                                    localStorage.getItem("user") ?? "{}"
+                                );
+                                
+                            }}
                         >
                             Làm bài
                             <svg

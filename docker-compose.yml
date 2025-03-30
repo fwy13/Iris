@@ -1,0 +1,12 @@
+services:
+  iris:
+    ports:
+      - 3000:3000
+    container_name: iris
+    image: iris:latest
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
