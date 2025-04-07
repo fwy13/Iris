@@ -14,7 +14,6 @@ async function checkCaptcha(token: string): Promise<boolean> {
     }).then(res => res.json());
     return result.success;
 }
-
 export async function POST(req: NextRequest) {
     const { email, password, token } = await req.json();
     if (!email || !password || !token) return NextResponse.json({ error: true, msg: "Vui lọc nhập đủ thông tin!" });
