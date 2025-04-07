@@ -6,17 +6,17 @@ import { prisma } from "@/db/prisma";
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 
-async function checkCaptcha(token: string): Promise<boolean> {
-    const formData = new FormData();
-    formData.append("secret", process.env.TURNSTILE_SECRET);
-    formData.append("response", token);
-    const url = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-    const result = await fetch(url, {
-        body: formData,
-        method: "POST",
-    }).then(res => res.json());
-    return result.success;
-}
+// async function checkCaptcha(token: string): Promise<boolean> {
+//     const formData = new FormData();
+//     formData.append("secret", process.env.TURNSTILE_SECRET);
+//     formData.append("response", token);
+//     const url = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+//     const result = await fetch(url, {
+//         body: formData,
+//         method: "POST",
+//     }).then(res => res.json());
+//     return result.success;
+// }
 
 async function sendCodeVerifyEmail(email: string) {
     const verificationCode = crypto.randomInt(100000, 999999).toString();
@@ -62,10 +62,10 @@ async function sendCodeVerifyEmail(email: string) {
 
 
 export async function POST(req: NextRequest) {
-    const { email, password, fullName, tokenCaptcha } = await req.json();
-    if (!email || !password || !fullName || !tokenCaptcha) return NextResponse.json({ error: true, msg: "Vui lòng nhập đủ thông tin!" });
-    const isCheck = await checkCaptcha(tokenCaptcha);
-    if (!isCheck) return NextResponse.json({ error: true, msg: "Sai CAPTCHA!" });
+    const { email, password, fullName } = await req.json();
+    if (!email || !password || !fullName) return NextResponse.json({ error: true, msg: "Vui lòng nhập đủ thông tin!" });
+    // const isCheck = await checkCaptcha(tokenCaptcha);
+    // if (!isCheck) return NextResponse.json({ error: true, msg: "Sai CAPTCHA!" });
 
     const user = await prisma.user.findFirst({
         where: {

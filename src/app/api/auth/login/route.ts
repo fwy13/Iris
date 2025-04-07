@@ -3,23 +3,23 @@ import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import { ReCreateToken } from "@/utils/ReCreateToken";
 
-async function checkCaptcha(token: string): Promise<boolean> {
-    const formData = new FormData();
-    formData.append("secret", process.env.TURNSTILE_SECRET);
-    formData.append("response", token);
-    const url = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-    const result = await fetch(url, {
-        body: formData,
-        method: "POST",
-    }).then(res => res.json());
-    return result.success;
-}
+// async function checkCaptcha(token: string): Promise<boolean> {
+//     const formData = new FormData();
+//     formData.append("secret", process.env.TURNSTILE_SECRET);
+//     formData.append("response", token);
+//     const url = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+//     const result = await fetch(url, {
+//         body: formData,
+//         method: "POST",
+//     }).then(res => res.json());
+//     return result.success;
+// }
 
 export async function POST(req: NextRequest) {
-    const { email, password, token } = await req.json();
-    if (!email || !password || !token) return NextResponse.json({ error: true, msg: "Vui lọc nhập đủ thông tin!" });
-    const isCheck = await checkCaptcha(token);
-    if (!isCheck) return NextResponse.json({ error: true, msg: "Sai CAPTCHA!" });
+    const { email, password } = await req.json();
+    if (!email || !password) return NextResponse.json({ error: true, msg: "Vui lọc nhập đủ thông tin!" });
+    // const isCheck = await checkCaptcha(token);
+    // if (!isCheck) return NextResponse.json({ error: true, msg: "Sai CAPTCHA!" });
     const user = await prisma.user.findFirst({
         where: {
             email: email
