@@ -5,7 +5,7 @@ import { Editor } from "@monaco-editor/react";
 import { parseQuizText, QuizQuestion } from "@/utils/parserQuiz";
 import { extractTextFromDocx, ImageData } from "@/utils/parserDocx";
 import { debounce } from "lodash";
-import FileInput from "../components/FileInput";
+import FileInput from "../../components/FileInput";
 import { redirect } from "next/navigation";
 
 const PageUpload = () => {

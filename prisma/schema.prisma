@@ -7,21 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Quizs {
-  id    String  @id @db.VarChar(255)
-  name  String  @db.VarChar(255)
-  time  Int
-  data  Json
-  count Int
-  owner String? @db.VarChar(255)
-  Users Users?  @relation(fields: [owner], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "owner-id")
-
-  @@index([owner], map: "owner-id")
+model User {
+  id         String   @default(cuid())
+  email      String   @id @unique(map: "email")
+  password   String
+  name       String
+  createdAt  DateTime @default(now())
+  image      String?
+  token      String   @db.VarChar(1000)
+  User       User     @relation("UserToUser", fields: [email], references: [email], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_User")
+  other_User User?    @relation("UserToUser")
 }
 
-model Users {
-  id     String  @id @db.VarChar(255)
-  name   String  @db.VarChar(255)
-  avatar String  @db.VarChar(255)
-  Quizs  Quizs[]
+model EmailStatus {
+  email  String @id
+  status String @default("FALSE") @db.Char(50)
+  code   Int
 }
