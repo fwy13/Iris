@@ -64,8 +64,8 @@ async function sendCodeVerifyEmail(email: string) {
 export async function POST(req: NextRequest) {
     const { email, password, fullName, tokenCaptcha } = await req.json();
     if (!email || !password || !fullName || !tokenCaptcha) return NextResponse.json({ error: true, msg: "Vui lòng nhập đủ thông tin!" });
-    // const isCheck = await checkCaptcha(tokenCaptcha);
-    // if (!isCheck) return NextResponse.json({ error: true, msg: "Sai CAPTCHA!" });
+    const isCheck = await checkCaptcha(tokenCaptcha);
+    if (!isCheck) return NextResponse.json({ error: true, msg: "Sai CAPTCHA!" });
 
     const user = await prisma.user.findFirst({
         where: {

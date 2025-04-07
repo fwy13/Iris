@@ -1,7 +1,7 @@
 "use client";
 import { useUser } from "@/stores/useUser";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha"
 
 

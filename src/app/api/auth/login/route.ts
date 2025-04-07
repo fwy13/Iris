@@ -18,8 +18,8 @@ async function checkCaptcha(token: string): Promise<boolean> {
 export async function POST(req: NextRequest) {
     const { email, password, token } = await req.json();
     if (!email || !password || !token) return NextResponse.json({ error: true, msg: "Vui lọc nhập đủ thông tin!" });
-    // const isCheck = await checkCaptcha(token);
-    // if (!isCheck) return NextResponse.json({ error: true, msg: "Sai CAPTCHA!" });
+    const isCheck = await checkCaptcha(token);
+    if (!isCheck) return NextResponse.json({ error: true, msg: "Sai CAPTCHA!" });
     const user = await prisma.user.findFirst({
         where: {
             email: email
