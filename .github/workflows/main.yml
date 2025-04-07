@@ -18,5 +18,5 @@ jobs:
         script: |
           cd Iris
           git pull origin master
-          sudo docker compose down
-          sudo docker compose up -d --build
+          docker compose down
+          docker compose up -d
