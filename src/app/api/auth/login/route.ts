@@ -12,6 +12,7 @@ async function checkCaptcha(token: string): Promise<boolean> {
         method: "POST",
         body: params
     }).then(res => res.json());
+    console.log(res);
     return res.success;
 }
 
