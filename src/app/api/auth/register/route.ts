@@ -7,16 +7,15 @@ import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 
 async function checkCaptcha(token: string): Promise<boolean> {
-    const params = new URLSearchParams({
-        secret: process.env.RECAPTCHA_SECRET,
-        response: token
-    });
-    const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    const formData = new FormData();
+    formData.append("secret", process.env.TURNSTILE_SECRET);
+    formData.append("response", token);
+    const url = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+    const result = await fetch(url, {
+        body: formData,
         method: "POST",
-        body: params
     }).then(res => res.json());
-    console.log(res);
-    return res.success;
+    return result.success;
 }
 
 async function sendCodeVerifyEmail(email: string) {

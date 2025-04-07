@@ -3,7 +3,7 @@ import { useUser } from "@/stores/useUser";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha"
+import Turnstile from "react-turnstile";
 
 
 const Login = () => {
@@ -36,9 +36,9 @@ const Login = () => {
                 <h1 className="text-gray-900 font-bold">Đăng nhập</h1>
                 <input type="text" placeholder="Nhập email" onChange={(e) => setEmail(e.target.value)} className="outline-none border-2 border-blue-400 py-1 px-2 rounded-sm w-full text-gray-900" />
                 <input type="password" placeholder="Nhập mật khẩu" onChange={(e) => setPassword(e.target.value)} className="outline-none border-2 border-blue-400 py-1 px-2 rounded-sm w-full text-gray-900" />
-                <ReCAPTCHA onChange={(token) => {
-                    setToken(token!);
-                }} sitekey="6LdfwAsrAAAAAIbJMoP3RkhcpmvmhppuboAYPkHY" />
+                <Turnstile sitekey="0x4AAAAAABFZDgN_trIdJgLu" onVerify={(token) => {
+                    setToken(token);
+                }} />
                 <Link href={"/forgot-password"} className="text-blue-400 self-start">Quên mật khẩu?</Link>
                 <button className="bg-blue-400 text-white p-2 rounded-sm w-full" onClick={login}>Đăng nhập</button>
                 <div className="divider divider-primary m-0 text-black">Hoặc</div>
